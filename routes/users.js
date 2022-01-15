@@ -50,9 +50,6 @@ router.post('/', (req, res, next) => {
            err.message || "Some error occurred while creating the client."
        });
      });
- 
- 
-
 });
 
 module.exports = router;
