@@ -14,6 +14,28 @@ router.get('/', function(req, res, next) {
    .catch(error => res.status(400).send(error))
 });
 
+router.post('/validate', function(req, res, next){
+  let usuario = req.body.user;
+  let contrasenia = req.body.password;
+  models.usuario.findOne({
+    where: {
+      Correo: usuario,
+      Contrasenia: contrasenia
+    }
+  })
+   .then(usuario => {
+       if(usuario){
+         res.cookie('usuario',usuario , {expire : new Date() + 9999});
+         res.redirect('http://localhost:4200/home');
+       }else{
+         res.cookie('usuario', '', {expires: new Date(0)});
+         res.redirect('http://localhost:4200/');
+       }
+    })
+   .catch(error => res.status(400).send(error))
+
+});
+
 router.get('/:idCorreo', function(req, res, next) {
   let idCorreo  = req.params.idCorreo;
   models.usuario.findByPk(idCorreo)
@@ -50,6 +72,9 @@ router.post('/', (req, res, next) => {
            err.message || "Some error occurred while creating the client."
        });
      });
+ 
+ 
+
 });
 
 module.exports = router;
