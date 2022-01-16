@@ -35,7 +35,8 @@ router.post('/validate', function(req, res, next){
            fecha: dateTime,
            correoUser: req.body.user, 
           }; 
-          models.sesion.create(custom)
+          models.sesion.create(custom);
+          
           res.redirect('http://localhost:4200/home');
        }else{
          res.cookie('usuario', '', {expires: new Date(0)});
@@ -45,6 +46,7 @@ router.post('/validate', function(req, res, next){
    .catch(error => res.status(400).send(error))
 
 });
+
 
 
 router.get('/:idCorreo', function(req, res, next) {
