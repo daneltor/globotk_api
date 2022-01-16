@@ -15,18 +15,28 @@ router.get('/', function(req, res, next) {
 });
 
 router.post('/validate', function(req, res, next){
-  let usuario = req.body.user;
+  let cliente = req.body.user;
   let contrasenia = req.body.password;
   models.usuario.findOne({
     where: {
-      Correo: usuario,
+      Correo: cliente,
       Contrasenia: contrasenia
     }
   })
    .then(usuario => {
        if(usuario){
-         res.cookie('usuario',usuario , {expire : new Date() + 9999});
-         res.redirect('http://localhost:4200/home');
+         res.cookie('usuario',cliente , {expire : new Date() + 9999});
+         var today = new Date();
+         var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+         var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+         var dateTime = date+' '+time;
+         
+         const custom = {
+           fecha: dateTime,
+           correoUser: req.body.user, 
+          }; 
+          models.sesion.create(custom)
+          res.redirect('http://localhost:4200/home');
        }else{
          res.cookie('usuario', '', {expires: new Date(0)});
          res.redirect('http://localhost:4200/');
@@ -35,6 +45,7 @@ router.post('/validate', function(req, res, next){
    .catch(error => res.status(400).send(error))
 
 });
+
 
 router.get('/:idCorreo', function(req, res, next) {
   let idCorreo  = req.params.idCorreo;
@@ -65,6 +76,7 @@ router.post('/', (req, res, next) => {
    models.usuario.create(custom)
      .then(data => {
        res.send(data);
+       res.redirect('http://localhost:4200/register');
      })
      .catch(err => {
        res.status(500).send({

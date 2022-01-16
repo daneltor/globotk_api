@@ -2,20 +2,13 @@ const Sequelize = require('sequelize');
 module.exports = function(sequelize, DataTypes) {
   return sequelize.define('sesion', {
     id: {
+      autoIncrement: true,
       type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true
     },
-    horaInicio: {
-      type: DataTypes.TIME,
-      allowNull: true
-    },
-    horaFin: {
-      type: DataTypes.TIME,
-      allowNull: true
-    },
     fecha: {
-      type: DataTypes.DATEONLY,
+      type: DataTypes.DATE,
       allowNull: true
     },
     correoUser: {
