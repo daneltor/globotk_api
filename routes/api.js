@@ -4,6 +4,7 @@ const sequelize = require('../models/index.js').sequelize;
 var initModels = require("../models/init-models");
 var models = initModels(sequelize);
 const {QueryTypes} = require('sequelize');
+var nodemailer = require('nodemailer');
 
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
@@ -29,5 +30,29 @@ router.get('/sesiones/:idSesion', function(req, res, next) {
     })
    .catch(error => res.status(400).send(error))
 });
+
+router.post("/sendmail", (req, res) => {
+   console.log("request came");
+   let user = req.body;
+   transporter.sendMail(user, function(error, info){
+      if (error) {
+        console.log(error);
+      } else {
+        console.log('Email sent: ' + info.response);
+      }
+   });
+});
+
+var transporter = nodemailer.createTransport({
+   host: "smtp.gmail.com",
+   port: 465,
+   secure: true,
+     auth: {
+       user: "globotecarios@gmail.com",
+       pass: "zurgbtdgmwwujslz"
+     }
+   });
+ 
+ 
 
 module.exports = router;
