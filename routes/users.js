@@ -24,7 +24,7 @@ router.post('/validate', function(req, res, next){
     }
   })
    .then(usuario => {
-       if(usuario){
+       if(!usuario.isAdmin){
          res.cookie('usuario',cliente , {expire : new Date() + 9999});
          var today = new Date();
          var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
@@ -38,7 +38,10 @@ router.post('/validate', function(req, res, next){
           models.sesion.create(custom);
           
           res.redirect('http://localhost:4200/home');
-       }else{
+       }else if(usuario.isAdmin){
+        res.redirect('http://localhost:4200/dashboard');
+       }
+       else{
          res.cookie('usuario', '', {expires: new Date(0)});
          res.redirect('http://localhost:4200/');
        }
