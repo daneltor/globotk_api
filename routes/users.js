@@ -14,6 +14,8 @@ router.get('/', function(req, res, next) {
    .catch(error => res.status(400).send(error))
 });
 
+
+
 router.post('/validate', function(req, res, next){
   let cliente = req.body.user;
   let contrasenia = req.body.password;
@@ -39,6 +41,7 @@ router.post('/validate', function(req, res, next){
           
           res.redirect('http://localhost:4200/home');
        }else if(usuario.isAdmin){
+        res.cookie('usuario',cliente , {expire : new Date() + 9999});
         res.redirect('http://localhost:4200/dashboard');
        }
        else{
@@ -80,7 +83,7 @@ router.post('/', (req, res, next) => {
    // Save Tutorial in the database
    models.usuario.create(custom)
      .then(data => {
-       res.send(data);
+       //res.send(data);
        res.redirect('http://localhost:4200/register');
      })
      .catch(err => {
