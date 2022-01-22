@@ -8,7 +8,7 @@ module.exports = function(sequelize, DataTypes) {
       primaryKey: true
     },
     titulo: {
-      type: DataTypes.CHAR(30),
+      type: DataTypes.CHAR(100),
       allowNull: true
     },
     descripcion: {

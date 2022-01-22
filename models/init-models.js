@@ -12,7 +12,8 @@ function initModels(sequelize) {
   var sesionpais = _sesionpais(sequelize, DataTypes);
   var usuario = _usuario(sequelize, DataTypes);
 
-
+  noticiafavorita.removeAttribute("id");
+  noticiafavorita.removeAttribute("descripcion")
   return {
     noticia,
     noticiafavorita,

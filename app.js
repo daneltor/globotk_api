@@ -12,7 +12,7 @@ var usersRouter = require('./routes/users');
 var apiRouter = require('./routes/api');
 var sessionRouter = require('./routes/session');
 var adminRouter = require('./routes/admin');
-
+var noticiaFavRouter = require('./routes/noticiaFav');
 
 var app = express();
 app.use(cors());
@@ -29,6 +29,7 @@ app.use('/users', usersRouter);
 app.use('/api', apiRouter);
 app.use('/session', sessionRouter);
 app.use('/admin', adminRouter);
+app.use('/notifav', noticiaFavRouter);
 
 
 
