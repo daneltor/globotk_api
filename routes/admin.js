@@ -71,7 +71,6 @@ router.post('/', (req, res, next) => {
    models.usuario.create(custom)
      .then(data => {
        res.send(data);
-       res.redirect('http://localhost:4200/admUsers');
      })
      .catch(err => {
        res.status(500).send({
