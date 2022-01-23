@@ -12,7 +12,7 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: true
     },
     descripcion: {
-      type: DataTypes.CHAR(50),
+      type: DataTypes.CHAR(150),
       allowNull: true
     },
     ImagenAsociada: {

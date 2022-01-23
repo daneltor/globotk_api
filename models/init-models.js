@@ -12,8 +12,12 @@ function initModels(sequelize) {
   var sesionpais = _sesionpais(sequelize, DataTypes);
   var usuario = _usuario(sequelize, DataTypes);
 
+  noticiafavorita.belongsTo(noticia, {as: "noticia", foreignKey: "idNoticia"})
+  noticia.hasMany(noticiafavorita, {as: "noticiafavorita", foreignKey: "idNoticia"})
+  
+
   noticiafavorita.removeAttribute("id");
-  noticiafavorita.removeAttribute("descripcion")
+  
   return {
     noticia,
     noticiafavorita,

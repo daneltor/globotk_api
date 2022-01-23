@@ -12,6 +12,7 @@ var usersRouter = require('./routes/users');
 var apiRouter = require('./routes/api');
 var sessionRouter = require('./routes/session');
 var adminRouter = require('./routes/admin');
+var noticiasRouter = require('./routes/noticia');
 var noticiaFavRouter = require('./routes/noticiaFav');
 
 var app = express();
@@ -30,7 +31,7 @@ app.use('/api', apiRouter);
 app.use('/session', sessionRouter);
 app.use('/admin', adminRouter);
 app.use('/notifav', noticiaFavRouter);
-
+app.use('/noticias', noticiasRouter);
 
 
 module.exports = app;
