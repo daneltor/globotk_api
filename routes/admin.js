@@ -30,8 +30,8 @@ router.delete('/users', (req, res, next) => {
      });
  });
 
- router.put('/clientes', (req, res, next) => {
-    const id = req.body.id;
+ router.put('/users', (req, res, next) => {
+    const id = req.body.Correo;
  
    models.clientes.update(req.body, {
      where: { id: id }
@@ -55,7 +55,7 @@ router.delete('/users', (req, res, next) => {
  
  });
 
-router.post('/', (req, res, next) => {    
+router.post('/users', (req, res, next) => {    
    // Create a client
    const custom = {
      Correo: req.body.Correo,
