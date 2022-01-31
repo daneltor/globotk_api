@@ -31,25 +31,35 @@ router.delete('/users', (req, res, next) => {
  });
 
  router.put('/users', (req, res, next) => {
-    const id = req.body.Correo;
+   const id = req.body.Correo;
+
+   const custom = {
+      Correo: req.body.Correo,
+      Nombre: req.body.Nombre, 
+      Apellido: req.body.Apellido,
+      Contrasenia: req.body.Contrasenia,
+      celular: req.body.celular,
+      fechaNacimiento: req.body.fechaNacimiento,
+      isAdmin: req.body.isAdmin
+    };
  
-   models.clientes.update(req.body, {
-     where: { id: id }
+   models.usuario.update(custom, {
+     where: { Correo: id }
    })
      .then(num => {
        if (num == 1) {
          res.send({
-           message: "Client was updated successfully."
+           message: "User was updated successfully."
          });
        } else {
          res.send({
-           message: `Cannot update client with id=${id}. Maybe client was not found or req.body is empty!`
+           message: `Cannot update user with correo=${id}. Maybe user was not found or req.body is empty!`
          });
        }
      })
      .catch(err => {
        res.status(500).send({
-         message: "Error updating client with id=" + id
+         message: "Error updating user with correo=" + id
        });
      });
  
@@ -75,7 +85,7 @@ router.post('/users', (req, res, next) => {
      .catch(err => {
        res.status(500).send({
          message:
-           err.message || "Some error occurred while creating the client."
+           err.message || "Some error occurred while creating the user."
        });
      });
  

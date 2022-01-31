@@ -54,7 +54,6 @@ router.post('/validate', function(req, res, next){
 });
 
 
-
 router.get('/:idCorreo', function(req, res, next) {
   let idCorreo  = req.params.idCorreo;
   models.usuario.findByPk(idCorreo)
@@ -67,6 +66,7 @@ router.get('/:idCorreo', function(req, res, next) {
     })
    .catch(error => res.status(400).send(error))
 });
+
 
 router.post('/', (req, res, next) => {    
    // Create a client
