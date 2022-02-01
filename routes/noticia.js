@@ -60,9 +60,18 @@ router.post('/', function(req, res, next){
 router.put('/', (req, res, next) => {
   const ide = req.body.id;
 
- models.noticia.update(req.body, {
-   where: { id: ide }
- })
+  const noticia= {
+    id: req.body.id,
+    titulo: req.body.titulo,
+    descripcion: req.body.descripcion,
+    ImagenAsociada: req.body.ImagenAsociada,
+    fechaActualizacion: req.body.fechaActualizacion,
+    categoria: req.body.categoria,
+    rutaNoticia: req.body.rutaNoticia,
+  };
+  models.noticia.update(req.body, {
+    where: { id: ide }
+  })
    .then(num => {
      if (num == 1) {
        res.send({
