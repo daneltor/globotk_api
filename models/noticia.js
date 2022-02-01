@@ -26,6 +26,10 @@ module.exports = function(sequelize, DataTypes) {
     categoria: {
       type: DataTypes.CHAR(30),
       allowNull: true
+    },
+    rutaNoticia: {
+      type: DataTypes.TEXT,
+      allowNull: true
     }
   }, {
     sequelize,
