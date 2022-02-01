@@ -7,7 +7,7 @@ var models = initModels(sequelize);
 /* GET home page. */
 router.get('/', function(req, res, next) {
   models.noticiafavorita.findAll({
-    include: {model: models.noticia, as: "noticia", attributes: ["titulo"]},
+    include: {model: models.noticia, as: "noticia", attributes: ["titulo","descripcion","categoria","rutaNoticia"]},
     //attributes: {exclude: ["id"]}
   })
   .then(noticiaFav => {
