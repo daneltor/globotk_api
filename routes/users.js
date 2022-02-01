@@ -41,7 +41,18 @@ router.post('/validate', function(req, res, next){
           
           res.redirect('http://localhost:4200/home');
        }else if(usuario.isAdmin){
-        res.cookie('usuario',cliente , {expire : new Date() + 9999});
+         res.cookie('usuario',cliente , {expire : new Date() + 9999});
+         var today = new Date();
+         var fecha = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+         var hora = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+         var fechaHora = fecha+' '+hora;
+         
+         const custom = {
+           fecha: fechaHora,
+           correoUser: req.body.user, 
+          }; 
+          models.sesion.create(custom);
+          
         res.redirect('http://localhost:4200/dashboard');
        }
        else{

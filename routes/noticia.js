@@ -59,16 +59,7 @@ router.post('/', function(req, res, next){
 
 router.put('/', (req, res, next) => {
   const ide = req.body.id;
-
-  const noticia= {
-    id: req.body.id,
-    titulo: req.body.titulo,
-    descripcion: req.body.descripcion,
-    ImagenAsociada: req.body.ImagenAsociada,
-    fechaActualizacion: req.body.fechaActualizacion,
-    categoria: req.body.categoria,
-    rutaNoticia: req.body.rutaNoticia,
-  };
+  
   models.noticia.update(req.body, {
     where: { id: ide }
   })

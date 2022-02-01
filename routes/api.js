@@ -18,6 +18,56 @@ router.get('/sesiones', function(req, res, next) {
    .catch(error => res.status(400).send(error))
 });
 
+router.delete('/sesiones', (req, res, next) => {
+  const ide = req.body.id;
+
+ models.sesion.destroy({
+   where: { id: ide }
+ })
+   .then(num => {
+     if (num == 1) {
+       res.send({
+         message: "Sesion was deleted successfully!"
+       });
+     } else {
+       res.send({
+         message: `Cannot delete Sesion with id=${ide}. Maybe Sesion was not found!`
+       });
+     }
+   })
+   .catch(err => {
+     res.status(500).send({
+       message: "Could not delete Sesion with id=" + ide
+     });
+   });
+});
+
+
+router.put('/sesiones', (req, res, next) => {
+  const ide = req.body.id;
+  
+  models.sesion.update(req.body, {
+    where: { id: ide }
+  })
+   .then(num => {
+     if (num == 1) {
+       res.send({
+         message: "Sesion was updated successfully."
+       });
+     } else {
+       res.send({
+         message: `Cannot update Sesion with id=${ide}. Maybe Sesion was not found or req.body is empty!`
+       });
+     }
+   })
+   .catch(err => {
+     res.status(500).send({
+       message: "Error updating Sesion with id=" + ide
+     });
+   });
+
+});
+
 router.get('/sesiones/:idSesion', function(req, res, next) {
   let idSesion  = req.params.idSesion;
   models.sesion.findByPk(idSesion)
