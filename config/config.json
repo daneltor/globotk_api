@@ -1,7 +1,7 @@
 {
   "development": {
-    "username": "rpcedill",
-    "password": "rpcedill",
+    "username": "root",
+    "password": null,
     "database": "globotk",
     "host": "127.0.0.1",
     "dialect": "mysql"
