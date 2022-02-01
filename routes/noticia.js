@@ -13,6 +13,20 @@ router.get('/', function(req, res, next) {
   .catch(error => res.status(400).send(error));
 });
 
+router.get('/:categoria', (req, res, next) => {
+  let cat = req.params.categoria;
+  if(cat=="musicnews"){
+    cat="Music News";
+  }
+  models.noticia.findAll({
+    where: {categoria: cat}
+  })
+  .then(musicn => {
+    res.send(musicn);
+  })
+  .catch(error=> res.status())
+})
+
 router.post('/', function(req, res, next){
   const noticia= {
     titulo: req.body.titulo,
@@ -20,6 +34,7 @@ router.post('/', function(req, res, next){
     ImagenAsociada: req.body.ImagenAsociada,
     fechaActualizacion: req.body.fechaActualizacion,
     categoria: req.body.categoria,
+    rutaNoticia: req.body.rutaNoticia,
   };
 
  models.noticia.findOne(
