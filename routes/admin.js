@@ -93,4 +93,35 @@ router.post('/users', (req, res, next) => {
 
 });
 
+
+router.get('/tablaPaises', function (req, res, next) {
+   sequelize.query("SELECT pais as company,count(*) as frequency FROM sesionpais group by pais;", {
+   type: QueryTypes.SELECT
+   })
+   .then(paises => {
+      res.send(paises)
+   })
+   .catch(error => res.status(400).send(error))
+});
+
+router.get('/tablaSesiones', function (req, res, next) {
+   sequelize.query("SELECT date, count(*) as value FROM (SELECT SUBSTRING(fecha, 1, 10) AS date FROM sesion) t group by date order by date DESC limit 7;", {
+   type: QueryTypes.SELECT
+   })
+   .then(sesiones => {
+      res.send(sesiones)
+   })
+   .catch(error => res.status(400).send(error))
+});
+
+router.get('/tablaCategorias', function (req, res, next) {
+   sequelize.query("SELECT categoria as company,count(*) as frequency FROM noticia group by categoria;", {
+   type: QueryTypes.SELECT
+   })
+   .then(noticias => {
+      res.send(noticias)
+   })
+   .catch(error => res.status(400).send(error))
+});
+
 module.exports = router;
