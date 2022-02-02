@@ -88,8 +88,6 @@ router.post('/users', (req, res, next) => {
            err.message || "Some error occurred while creating the user."
        });
      });
- 
- 
 
 });
 

@@ -18,6 +18,14 @@ router.get('/sesiones', function(req, res, next) {
    .catch(error => res.status(400).send(error))
 });
 
+router.get('/cosesiones', function(req, res, next) {
+  models.sesionpais.findAll()
+   .then(sesionpais => {
+      res.send(sesionpais)
+   })
+   .catch(error => res.status(400).send(error))
+});
+
 router.delete('/sesiones', (req, res, next) => {
   const ide = req.body.id;
 
