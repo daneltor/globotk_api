@@ -14,6 +14,7 @@ var sessionRouter = require('./routes/session');
 var adminRouter = require('./routes/admin');
 var noticiasRouter = require('./routes/noticia');
 var noticiaFavRouter = require('./routes/noticiaFav');
+var reporteRouter = require('./routes/reporte');
 
 var app = express();
 app.use(cors());
@@ -32,6 +33,7 @@ app.use('/session', sessionRouter);
 app.use('/admin', adminRouter);
 app.use('/notifav', noticiaFavRouter);
 app.use('/noticias', noticiasRouter);
+app.use('/reporte', reporteRouter);
 
 
 module.exports = app;
