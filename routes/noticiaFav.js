@@ -18,7 +18,7 @@ router.get('/', function(req, res, next) {
 
 router.get('/:correo', function(req, res, next) {
   models.noticiafavorita.findAll({
-    include: {model: models.noticia, as: "noticia", attributes: ["titulo","fechaActualizacion","categoria"]},
+    include: {model: models.noticia, as: "noticia", attributes: ["titulo","categoria"]},
     where: {correoUser: req.params.correo}
   })
   .then(noticiaFav => {
