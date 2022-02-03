@@ -16,6 +16,17 @@ router.get('/', function(req, res, next) {
   .catch(error => res.status(400).send(error));
 });
 
+router.get('/:correo', function(req, res, next) {
+  models.noticiafavorita.findAll({
+    include: {model: models.noticia, as: "noticia", attributes: ["titulo","fechaActualizacion","categoria"]},
+    where: {correoUser: req.params.correo}
+  })
+  .then(noticiaFav => {
+    res.send(noticiaFav);
+  })
+  .catch(error => res.status(400).send(error));
+});
+
 router.post('/', function(req, res, next){
   const noticiafav= {
     idNoticia: req.body.idNoticia,
