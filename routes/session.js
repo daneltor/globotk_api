@@ -74,10 +74,10 @@ router.delete('/country', (req, res, next) => {
 router.post('/country', function(req, res, next) {
     const custom = {
         pais: req.body.pais,
-		enlacePais: req.body.enlacePais,
-		fecha: req.body.fecha,
-		idSesion: req.body.idSesion
-    };
+		    enlacePais: req.body.enlacePais,
+		    fecha: req.body.fecha,
+		    idSesion: req.body.idSesion
+      };
 
     models.sesionpais.create(custom)
       .then(data => {
@@ -86,11 +86,10 @@ router.post('/country', function(req, res, next) {
       .catch(err => {
         res.status(500).send({
           message:
-            err.message || "Some error occurred while creating the client."
+            err.message || "Some error occurred while creating the session."
         });
       });
-
-
-
 });
+
+
 module.exports = router;
